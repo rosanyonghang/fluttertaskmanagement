@@ -72,16 +72,18 @@ class _LoginformState extends State<Loginform> {
                   String message = "Failed";
                   if(username.text == 'admin' && password.text == "admin"){
                     message = "Success";
+                    Navigator.of(context).popAndPushNamed('/home');
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "Invalid username or password",
+                          style: TextStyle(fontSize: 32),
+                        ),
+                      ),
+                    );
                   }
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(
-                  //     content: Text(
-                  //       message,
-                  //       style: TextStyle(fontSize: 32),
-                  //     ),
-                  //   ),
-                  // );
-                  Navigator.of(context).popAndPushNamed('/home');
+
                 }
               },
               style: ElevatedButton.styleFrom(

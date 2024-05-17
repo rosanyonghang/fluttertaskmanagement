@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       // home is no longer required when using named routes
       // we must define the initial route for the app
       // initial route defines which route to open when app start
-      initialRoute: '/',
+      initialRoute: '/home',
       // routes is an object that holds path which defines which screen
       // to open when we navigated through name
       routes: {
