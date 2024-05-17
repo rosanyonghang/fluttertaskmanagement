@@ -39,7 +39,7 @@ class _TodohomeState extends State<Todohome> {
     // this function filters the id being pushed
     // we are creating a new array where the data being passed
     // does not exist on the basis of id
-    List<TaskModel> tempTask = tasks.where((task)=> task.id != el.id ).toList();
+    List<TaskModel> tempTask = tasks.where((task)=> task.id != id ).toList();
 
     // the new array replaces the old array of tasks
     setState(() {
