@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertaskmanagement/model/TaskModel.dart';
 
 class Addtask extends StatefulWidget {
+  // the variables below are inherited from the parent
+  // even widgets and functions can be passed as properties
   Function addTask;
   num newIndex;
   Addtask({required this.addTask, required this.newIndex});
@@ -72,6 +74,7 @@ class _AddtaskState extends State<Addtask> {
                               foregroundColor: Colors.white,
                             ),
                             onPressed: () {
+                              // the state acccesses its parent variables with widget object
                               widget.addTask(TaskModel(id: widget.newIndex, title: title, description: description));
                               Navigator.of(context).pop();
                             },

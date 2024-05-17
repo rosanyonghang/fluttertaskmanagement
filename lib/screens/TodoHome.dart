@@ -20,10 +20,33 @@ class _TodohomeState extends State<Todohome> {
     TaskModel(id: 5, title: "Task 5", description: "Task 5 description"),
   ];
 
+  // a void function to add new elements to the taskmodel
   void addTask(TaskModel task){
     setState(() {
       tasks.add(task);
     });
+  }
+
+  void deleteTask(num id){
+    // since this bottom sheet is a part of the list item,
+    // it also holds the data of the list item being rendered
+    print(id);
+    // for(var i; i< tasks.length; i++){
+    //   if(tasks[i].id != 1){
+    //     tempTask.add(tasks[i]);
+    //   }
+    // }
+    // this function filters the id being pushed
+    // we are creating a new array where the data being passed
+    // does not exist on the basis of id
+    List<TaskModel> tempTask = tasks.where((task)=> task.id != el.id ).toList();
+
+    // the new array replaces the old array of tasks
+    setState(() {
+      tasks = tempTask;
+    });
+    // it takes the navigation a step back
+    Navigator.of(context).pop();
   }
 
   num count = 1;
@@ -63,6 +86,9 @@ class _TodohomeState extends State<Todohome> {
                             onPressed: () {}, icon: Icon(Icons.edit)),
                         IconButton(
                             onPressed: () {
+                              // showModalBottomSheet is like a dialog box that appears from
+                              // the bottom of our screen
+                              // it holds or displays any widgets that we add
                               showModalBottomSheet<void>(context: context, builder: (BuildContext context)=>Container(
                                 child: Container(
                                   padding: EdgeInsets.all(24),
@@ -80,18 +106,7 @@ class _TodohomeState extends State<Todohome> {
                                             foregroundColor: Colors.white,
                                           ),
                                           onPressed: (){
-                                            print(el.id);
-                                            // for(var i; i< tasks.length; i++){
-                                            //   if(tasks[i].id != 1){
-                                            //     tempTask.add(tasks[i]);
-                                            //   }
-                                            // }
-                                            List<TaskModel> tempTask = tasks.where((task)=> task.id != el.id ).toList();
-
-                                            setState(() {
-                                                tasks = tempTask;
-                                            });
-                                            Navigator.of(context).pop();
+                                            deleteTask(el.id);
                                           },
                                           child: Text('Confirm'),
                                         ),
@@ -113,6 +128,7 @@ class _TodohomeState extends State<Todohome> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>
+                // we are passing the addTask method in the form of function property to AddTask widget
                 Addtask(addTask: addTask, newIndex: tasks.length)));
         },
         backgroundColor: Colors.red,
