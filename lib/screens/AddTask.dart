@@ -7,6 +7,7 @@ class Addtask extends StatefulWidget {
   State<Addtask> createState() => _AddtaskState();
 }
 
+// Creating task model since, we need multiple values for the same task
 class TaskModel {
   num id;
   String title;
@@ -47,6 +48,7 @@ class _AddtaskState extends State<Addtask> {
                   children: [
                     TextField(
                       onChanged: (val) {
+                        // this value changes variable when the input is changed
                         setState(() {
                           title = val;
                         });
@@ -73,6 +75,10 @@ class _AddtaskState extends State<Addtask> {
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
+                              // we are adding the new parameters from the
+                              // inputs to array with the function below
+                              // since we are getting separate strings,
+                              // we need to create a task model before we push
                               tasks.add(TaskModel(id: tasks.length + 1,
                                   title: title,
                                   description: description));
@@ -92,6 +98,7 @@ class _AddtaskState extends State<Addtask> {
               ),
               Container(
                 child: Column(
+                  // we render the tasks here
                   children: tasks.map((el) {
                     return Container(
                       margin: EdgeInsets.only(bottom: 12, top: 8),
@@ -111,6 +118,7 @@ class _AddtaskState extends State<Addtask> {
                           ),
                           Row(
                             children: [
+                              // Icon button is used to have a button with only icon and no texts
                               IconButton(
                                   onPressed: () {}, icon: Icon(Icons.edit)),
                               IconButton(
