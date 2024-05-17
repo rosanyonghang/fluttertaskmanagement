@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertaskmanagement/widgets/LoginForm.dart';
 
-class Logintask extends StatefulWidget {
-  @override
-  State<Logintask> createState() => _LogintaskState();
-}
-
-class _LogintaskState extends State<Logintask> {
+class Logintask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

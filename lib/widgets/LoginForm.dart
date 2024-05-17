@@ -46,6 +46,9 @@ class _LoginformState extends State<Loginform> {
                     // obsure text is for displaying dots instead of text
                     obscureText: true,
                     controller: password,
+                    // onEditingComplete: (){
+                    //   print('something');
+                    // },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your username';
@@ -70,14 +73,15 @@ class _LoginformState extends State<Loginform> {
                   if(username.text == 'admin' && password.text == "admin"){
                     message = "Success";
                   }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        message,
-                        style: TextStyle(fontSize: 32),
-                      ),
-                    ),
-                  );
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   SnackBar(
+                  //     content: Text(
+                  //       message,
+                  //       style: TextStyle(fontSize: 32),
+                  //     ),
+                  //   ),
+                  // );
+                  Navigator.of(context).popAndPushNamed('/home');
                 }
               },
               style: ElevatedButton.styleFrom(
