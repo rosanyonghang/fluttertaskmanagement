@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Stateful widgets can rerender the screen when the data is reloaded
 class Todohome extends StatefulWidget {
   @override
   State<Todohome> createState() => _TodohomeState();
@@ -27,6 +28,8 @@ class _TodohomeState extends State<Todohome> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
 
+          // we need to use setState, an inbuilt method to change the variable
+          // changing it directly will not rerender the screen
           setState(() {
             // title = "something new";
             count++;
