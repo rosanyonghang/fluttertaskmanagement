@@ -11,23 +11,35 @@ class Todohome extends StatefulWidget {
 
 class _TodohomeState extends State<Todohome> {
   String title = "Hello";
-
+  String ind = '-1';
   List<TaskModel> tasks = [
-    TaskModel(id: 1, title: "Task 1", description: "Task 1 description"),
-    TaskModel(id: 2, title: "Task 2", description: "Task 2 description"),
-    TaskModel(id: 3, title: "Task 3", description: "Task 3 description"),
-    TaskModel(id: 4, title: "Task 4", description: "Task 4 description"),
-    TaskModel(id: 5, title: "Task 5", description: "Task 5 description"),
+    TaskModel(id: '1', title: "Task 1", description: "Task 1 description"),
+    TaskModel(id: '2', title: "Task 2", description: "Task 2 description"),
+    TaskModel(id: '3', title: "Task 3", description: "Task 3 description"),
+    TaskModel(id: '4', title: "Task 4", description: "Task 4 description"),
+    TaskModel(id: '5', title: "Task 5", description: "Task 5 description"),
   ];
 
   // a void function to add new elements to the taskmodel
   void addTask(TaskModel task){
-    setState(() {
-      tasks.add(task);
-    });
+    print(task.id);
+    if(task.id == '-1') {
+      setState(() {
+        tasks.add(task);
+      });
+    }else{
+      int tempTaskIndex = tasks.indexWhere((el) => el.id == task.id);
+      List<TaskModel> tempTask = tasks;
+      tempTask[tempTaskIndex].title = task.title;
+      tempTask[tempTaskIndex].description = task.description;
+
+      setState(() {
+        tasks = tempTask;
+      });
+    }
   }
 
-  void deleteTask(num id){
+  void deleteTask(String id){
     // since this bottom sheet is a part of the list item,
     // it also holds the data of the list item being rendered
     print(id);
@@ -57,7 +69,7 @@ class _TodohomeState extends State<Todohome> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body:   Container(
+      body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
@@ -83,7 +95,12 @@ class _TodohomeState extends State<Todohome> {
                       children: [
                         // Icon button is used to have a button with only icon and no texts
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.edit)),
+                            onPressed: () {
+                              setState((){
+                                ind = el.id;
+                              });
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Addtask(addTask: addTask, task: el)));
+                            }, icon: Icon(Icons.edit)),
                         IconButton(
                             onPressed: () {
                               // showModalBottomSheet is like a dialog box that appears from
@@ -129,7 +146,7 @@ class _TodohomeState extends State<Todohome> {
         onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>
                 // we are passing the addTask method in the form of function property to AddTask widget
-                Addtask(addTask: addTask, newIndex: tasks.length)));
+                Addtask(addTask: addTask)));
         },
         backgroundColor: Colors.red,
         child: Icon(

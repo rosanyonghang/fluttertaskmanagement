@@ -1,6 +1,6 @@
 // Creating task model since, we need multiple values for the same task
 class TaskModel {
-  num id;
+  String id;
   String title;
   String description;
 
